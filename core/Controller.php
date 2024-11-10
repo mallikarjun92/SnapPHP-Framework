@@ -24,7 +24,7 @@ abstract class Controller
         $this->router = $router;
         $this->request = $request;
 
-        $loader = new FilesystemLoader(__DIR__ . '/../../../views');
+        $loader = new FilesystemLoader(__DIR__ . '/../../../../views');
         $this->twig = new Environment($loader);
 
         // Register custom Twig extension

@@ -55,7 +55,7 @@ class Kernel
     protected function loadRoutesFromControllers()
     {
         // Define the directory where controllers are located
-        $controllerDir = __DIR__ . '/../../../app/controllers';
+        $controllerDir = __DIR__ . '/../../../../app/controllers';
         
         // Get all PHP files in the controller directory
         $controllerFiles = glob($controllerDir . '/*.php');
