@@ -21,6 +21,12 @@ class Kernel
 
         // Initialize the debug
         $this->debug = new Debug();
+        
+        // Initialize the global constants
+        define('BASE_PATH', dirname(__DIR__, 4));
+
+        //TODO: add a mechanism to load env / configs
+
 
         // Load routes by scanning the controllers
         $this->loadRoutesFromControllers();
@@ -55,7 +61,7 @@ class Kernel
     protected function loadRoutesFromControllers()
     {
         // Define the directory where controllers are located
-        $controllerDir = __DIR__ . '/../../../../app/controllers';
+        $controllerDir = BASE_PATH . '/app/controllers';
         
         // Get all PHP files in the controller directory
         $controllerFiles = glob($controllerDir . '/*.php');
