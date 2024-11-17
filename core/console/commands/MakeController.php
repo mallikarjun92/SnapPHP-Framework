@@ -13,7 +13,7 @@ class MakeController
 
         $controllerName = ucfirst($arguments[0]) . 'Controller';
         $defaulRoute = strtolower($arguments[0]);
-        $path = realpath(__DIR__ . "\..\..\..\app\controllers");
+        $path = realpath(BASE_PATH_IN_COMMANDS . "/app/controllers");
         
         // Ensure the directory exists, or create it if it doesn't
         if (!is_dir($path)) {
