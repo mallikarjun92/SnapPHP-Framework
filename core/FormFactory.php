@@ -2,6 +2,7 @@
 
 namespace SnapPHP\Core;
 
+use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Validator\Validation;
@@ -22,6 +23,7 @@ class FormFactory
             self::$factory = Forms::createFormFactoryBuilder()
                 ->addExtension(new \Symfony\Component\Form\Extension\Validator\ValidatorExtension($validator))
                 ->addExtension(new CsrfExtension($csrfTokenManager))
+                ->addExtension(new HttpFoundationExtension())
                 ->getFormFactory();
         }
         return self::$factory;
