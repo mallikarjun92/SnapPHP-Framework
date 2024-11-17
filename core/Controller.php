@@ -5,6 +5,9 @@ namespace SnapPHP\Core;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use Symfony\Component\Form\FormRenderer;
+use Symfony\Bridge\Twig\Extension\FormExtension;
+use Symfony\Bridge\Twig\Form\TwigRendererEngine;
 
 
 /**
@@ -24,11 +27,18 @@ abstract class Controller
         $this->router = $router;
         $this->request = $request;
 
-        $loader = new FilesystemLoader(__DIR__ . '/../../../../views');
+        $loader = new FilesystemLoader(BASE_PATH . '/views');
         $this->twig = new Environment($loader);
 
         // Register custom Twig extension
         $this->twig->addExtension(new TwigExtension($this->router));
+
+        // Register Symfony FormExtension
+        $defaultFormTheme = 'form_div_layout.html.twig';
+        $rendererEngine = new TwigRendererEngine([$defaultFormTheme], $this->twig);
+        $formRenderer = new FormRenderer($rendererEngine);
+        $this->twig->addExtension(new FormExtension($formRenderer));
+
     }
 
     /**
