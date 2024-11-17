@@ -39,7 +39,7 @@ use Symfony\Component\HttpFoundation\Response;
 class $controllerName extends Controller
 {
     /**
-     * @Route(method=\"GET\", path=\"/".$defaulRoute."\", name=\"".$defaulRoute."\")
+     * @Route(methods=\"GET\", path=\"/".$defaulRoute."\", name=\"".$defaulRoute."\")
      */
     public function index(Request \$request)
     {

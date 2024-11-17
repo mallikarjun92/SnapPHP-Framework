@@ -94,12 +94,18 @@ class Kernel
             foreach ($annotations as $annotation) {
                 if ($annotation instanceof Route) {
                     $handler = [$className, $method->getName()];
-                    $this->router->add(
-                        $annotation->getMethods(),
-                        $annotation->getPath(),
-                        $handler,
-                        $annotation->getName()
-                    );
+
+                    // Parse methods (e.g., "GET,POST") and register each method
+                    $methods = array_map('trim', explode(',', trim($annotation->getMethods(), '{}')));
+
+                    foreach($methods as $httpMethod) {
+                        $this->router->add(
+                            strtoupper($httpMethod),
+                            $annotation->getPath(),
+                            $handler,
+                            $annotation->getName()
+                        );
+                    }
                 }
             }
         }
