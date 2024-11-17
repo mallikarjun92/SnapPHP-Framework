@@ -95,7 +95,7 @@ class Kernel
                 if ($annotation instanceof Route) {
                     $handler = [$className, $method->getName()];
                     $this->router->add(
-                        $annotation->getMethod(),
+                        $annotation->getMethods(),
                         $annotation->getPath(),
                         $handler,
                         $annotation->getName()

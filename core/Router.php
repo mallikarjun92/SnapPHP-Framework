@@ -21,10 +21,10 @@ class Router
      * @param callable|array $handler
      * @param string|null $name
      */
-    public function add($method, $path, $handler, $name = null)
+    public function add($methods, $path, $handler, $name = null)
     {
         $path = rtrim($path, '/') ?: '/';
-        $this->routes[] = compact('method', 'path', 'handler');
+        $this->routes[] = compact('methods', 'path', 'handler');
 
         if ($name) {
             $this->namedRoutes[$name] = $path;
@@ -37,7 +37,7 @@ class Router
         $uri = rtrim($request->getPathInfo(), '/') ?: '/';
 
         foreach ($this->routes as $route) {
-            if ($route['method'] !== $method) continue;
+            if ($route['methods'] !== $method) continue;
             $pattern = $this->convertToRegex($route['path']);
 
             if (preg_match($pattern, $uri, $matches)) {

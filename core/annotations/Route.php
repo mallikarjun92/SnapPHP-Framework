@@ -8,20 +8,20 @@ namespace SnapPHP\Core\Annotations;
  */
 class Route
 {
-    private $method;
+    private $methods;
     private $path;
     private $name;
 
     public function __construct(array $values)
     {
-        $this->method = $values['method'];
+        $this->methods = $values['methods'];
         $this->path = $values['path'];
         $this->name = $values['name'] ?? null;
     }
 
-    public function getMethod()
+    public function getMethods()
     {
-        return $this->method;
+        return $this->methods;
     }
 
     public function getPath()

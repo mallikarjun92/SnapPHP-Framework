@@ -5,10 +5,10 @@ namespace SnapPHP\Core\Console;
 class CommandManager
 {
     protected $commands = [
-        'make:controller' => 'Core\Console\Commands\MakeController',
-        'make:model' => 'Core\Console\Commands\MakeModel',
-        'make:view' => 'Core\Console\Commands\MakeView',
-        'help' => 'Core\Console\Commands\HelpCommand',
+        'make:controller' => 'SnapPHP\Core\Console\Commands\MakeController',
+        'make:model' => 'SnapPHP\Core\Console\Commands\MakeModel',
+        'make:view' => 'SnapPHP\Core\Console\Commands\MakeView',
+        'help' => 'SnapPHP\Core\Console\Commands\HelpCommand',
     ];
 
     public function run(array $args)
