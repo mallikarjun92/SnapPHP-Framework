@@ -8,6 +8,10 @@ use Twig\Loader\FilesystemLoader;
 use Symfony\Component\Form\FormRenderer;
 use Symfony\Bridge\Twig\Extension\FormExtension;
 use Symfony\Bridge\Twig\Form\TwigRendererEngine;
+use Twig\RuntimeLoader\FactoryRuntimeLoader;
+use Symfony\Bridge\Twig\Extension\TranslationExtension;
+use Symfony\Component\Translation\Loader\ArrayLoader;
+use Symfony\Component\Translation\Translator;
 
 
 /**
@@ -37,7 +41,22 @@ abstract class Controller
         $defaultFormTheme = 'form_div_layout.html.twig';
         $rendererEngine = new TwigRendererEngine([$defaultFormTheme], $this->twig);
         $formRenderer = new FormRenderer($rendererEngine);
-        $this->twig->addExtension(new FormExtension($formRenderer));
+
+        // Add FormExtension
+        $this->twig->addExtension(new FormExtension());
+
+        // Register FormRenderer runtime
+        $this->twig->addRuntimeLoader(new FactoryRuntimeLoader([
+            FormRenderer::class => function () use ($formRenderer) {
+                return $formRenderer;
+            },
+        ]));
+
+        // Add Translation support
+        $translator = new Translator('en');
+        $translator->addLoader('array', new ArrayLoader());
+        $this->twig->addExtension(new TranslationExtension($translator));
+
 
     }
 
